@@ -38,4 +38,29 @@ public class Biblioteka {
         }
         return licznik;
     }
+    public void wypozyczKsiazke(String tytul, Czytelnik czytelnik) {
+        Ksiazka znaleziona = znajdzKsiazkePoTytule(tytul);
+
+        if (znaleziona != null && znaleziona.isDostepna() == true) {
+            znaleziona.wypozycz();
+            czytelnik.zwiekszLiczbeWypozyczen();
+            System.out.println("SUKCES: Czytelnik wypożyczył książkę pt. '" + tytul + "'.");
+        } else {
+            System.out.println("BŁĄD: Książka '" + tytul + "' jest niedostępna lub nie istnieje w bibliotece.");
+        }
+    }
+
+    public void zwrocKsiazke(String tytul, Czytelnik czytelnik) {
+        Ksiazka znaleziona = znajdzKsiazkePoTytule(tytul);
+
+        if (znaleziona != null && znaleziona.isDostepna() == false) {
+            znaleziona.zwroc();
+            czytelnik.zmniejszLiczbeWypozyczen();
+            System.out.println("SUKCES: Czytelnik zwrócił książkę pt. '" + tytul + "'.");
+        } else {
+            System.out.println("BŁĄD: Książka nie była wypożyczona.");
+        }
+    }
+
+
 }
